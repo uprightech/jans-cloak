@@ -14,7 +14,7 @@ import org.keycloak.models.KeycloakSessionFactory;
 import org.keycloak.provider.ProviderConfigProperty;
 
 
-public class JansCloackAuthenticatorFactory implements AuthenticatorFactory {
+public class JansAuthenticatorFactory implements AuthenticatorFactory {
     
     private static final String PROVIDER_ID = "jans-cloak-authenticator";
 
