@@ -10,53 +10,69 @@
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <keycloak.version>21.1.1</keycloak.version>
+    <keycloak-server-spi.version>21.1.1</keycloak-server-spi.version>
+    <nimbus.oauth-sdk.version>10.11</nimbus.oauth-sdk.version>
   </properties>
-  <dependencies>
 
+  <repositories>
+   <repository>
+    <id>jans.io</id>
+    <url>https://jenkins.jans.io/maven/</url>
+   </repository>
+  </repositories>
+
+  <dependencies>
     <!-- keycloak dependencies -->
     <dependency>
       <groupId>org.keycloak</groupId>
       <artifactId>keycloak-core</artifactId>
       <scope>provided</scope>
-      <version>${keycloak.version}</version>
+      <version>${keycloak-server-spi.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.keycloak</groupId>
       <artifactId>keycloak-server-spi</artifactId>
       <scope>provided</scope>
-      <version>${keycloak.version}</version>
+      <version>${keycloak-server-spi.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.keycloak</groupId>
       <artifactId>keycloak-server-spi</artifactId>
       <scope>provided</scope>
-      <version>${keycloak.version}</version>
+      <version>${keycloak-server-spi.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.keycloak</groupId>
       <artifactId>keycloak-server-spi</artifactId>
       <scope>provided</scope>
-      <version>${keycloak.version}</version>
+      <version>${keycloak-server-spi.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.keycloak</groupId>
       <artifactId>keycloak-server-spi-private</artifactId>
       <scope>provided</scope>
-      <version>${keycloak.version}</version>
+      <version>${keycloak-server-spi.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.keycloak</groupId>
       <artifactId>keycloak-services</artifactId>
       <scope>provided</scope>
-      <version>${keycloak.version}</version>
+      <version>${keycloak-server-spi.version}</version>
     </dependency>
     <!-- end of keycloak dependencies -->
+
+    <!-- nimbus dependencies -->
+    <dependency>
+      <groupId>com.nimbusds</groupId>
+      <artifactId>oauth2-oidc-sdk</artifactId>
+      <version>${nimbus.oauth-sdk.version}</version>
+    </dependency>
+    <!-- end nimbus dependencies-->
 
     <dependency>
       <groupId>junit</groupId>

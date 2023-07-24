@@ -1,6 +1,8 @@
 package io.jans.kc.spi.auth;
 
-import java.util.List; 
+import java.util.List;
+
+import javax.ws.rs.core.Response;
 
 import org.keycloak.authentication.Authenticator;
 import org.keycloak.authentication.AuthenticationFlowContext;
@@ -8,7 +10,6 @@ import org.keycloak.authentication.RequiredActionFactory;
 
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.RealmModel;
-import org.keycloak.models.RequiredActionProviderModel;
 import org.keycloak.models.UserModel;
 
 public class JansAuthenticator implements Authenticator {
@@ -16,7 +17,8 @@ public class JansAuthenticator implements Authenticator {
     @Override
     public void authenticate(AuthenticationFlowContext context) {
 
-        return;
+        Response response = context.form().createForm("jans-auth-redirect.ftl");
+        context.challenge(response);
     }
 
     @Override

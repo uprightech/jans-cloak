@@ -15,6 +15,9 @@ import org.keycloak.models.KeycloakSessionFactory;
 import org.keycloak.provider.ProviderConfigProperty;
 import org.keycloak.provider.ProviderConfigurationBuilder;
 
+import com.nimbusds.oauth2.sdk.id.Issuer;
+import com.nimbusds.openid.connect.sdk.op.OIDCProviderMetadata;
+
 
 public class JansAuthenticatorFactory implements AuthenticatorFactory {
     
@@ -59,6 +62,12 @@ public class JansAuthenticatorFactory implements AuthenticatorFactory {
     @Override
     public void init(Config.Scope config) {
 
+        try {
+            Issuer issuer = new Issuer("https://gluu-instance.local/");
+            OIDCProviderMetadata opMetadata = OIDCProviderMetadata.resolve(issuer);
+        }catch(Exception e) {
+
+        }
         return;
     }
 
@@ -100,7 +109,7 @@ public class JansAuthenticatorFactory implements AuthenticatorFactory {
     @Override
     public boolean isUserSetupAllowed() {
 
-        return true;
+        return false;
     }
 
     @Override
