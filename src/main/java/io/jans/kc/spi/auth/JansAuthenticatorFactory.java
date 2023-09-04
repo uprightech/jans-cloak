@@ -1,7 +1,8 @@
 package io.jans.kc.spi.auth;
 
-import java.util.Arrays;
-import java.util.List; 
+import java.util.List;
+
+import org.jboss.logging.Logger;
 
 import org.keycloak.authentication.Authenticator;
 import org.keycloak.authentication.AuthenticatorFactory;
@@ -13,10 +14,9 @@ import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.KeycloakSessionFactory;
 
 import org.keycloak.provider.ProviderConfigProperty;
-import org.keycloak.provider.ProviderConfigurationBuilder;
 
-import com.nimbusds.oauth2.sdk.id.Issuer;
-import com.nimbusds.openid.connect.sdk.op.OIDCProviderMetadata;
+import io.jans.kc.spi.auth.impl.HashBasedOIDCMetaCache;
+import io.jans.kc.spi.auth.impl.NimbusOIDCService;
 
 
 public class JansAuthenticatorFactory implements AuthenticatorFactory {
@@ -26,26 +26,18 @@ public class JansAuthenticatorFactory implements AuthenticatorFactory {
     private static final String REFERENCE_CATEGORY = "Janssen Authentication";
     private static final String HELP_TEXT= "A third-party authenticator for Janssen Auth";
 
+    private static final Logger log = Logger.getLogger(JansAuthenticatorFactory.class);
+
     private static final AuthenticationExecutionModel.Requirement[] REQUIREMENT_CHOICES = {
         AuthenticationExecutionModel.Requirement.REQUIRED,
         AuthenticationExecutionModel.Requirement.ALTERNATIVE,
         AuthenticationExecutionModel.Requirement.DISABLED
     };
 
-    private static final ProviderConfigProperty JANS_CLIENT_ID_PROP = new ProviderConfigProperty(
-            "jans.auth.client.id",
-            "Janssen Client ID",
-            "Client ID of the OpenID Client created in Janssen-Auth",
-            ProviderConfigProperty.STRING_TYPE,
-            null, 
-            false);
     
-    private static final List<ProviderConfigProperty> CONFIG_PROPS = ProviderConfigurationBuilder
-            .create()
-            .property(JANS_CLIENT_ID_PROP)
-            .build();
-    
-    private static final JansAuthenticator INSTANCE = new JansAuthenticator();
+    private static final OIDCMetaCache META_CACHE = new HashBasedOIDCMetaCache();
+    private static final OIDCService OIDC_SERVICE = new NimbusOIDCService(META_CACHE);
+    private static final JansAuthenticator INSTANCE = new JansAuthenticator(OIDC_SERVICE);
 
     @Override
     public String getId() {
@@ -56,24 +48,20 @@ public class JansAuthenticatorFactory implements AuthenticatorFactory {
     @Override
     public Authenticator create(KeycloakSession session) {
 
+        log.info("Jans Authenticator created");
         return INSTANCE;
     }
 
     @Override
     public void init(Config.Scope config) {
 
-        try {
-            Issuer issuer = new Issuer("https://gluu-instance.local/");
-            OIDCProviderMetadata opMetadata = OIDCProviderMetadata.resolve(issuer);
-        }catch(Exception e) {
-
-        }
         return;
     }
 
     @Override
     public void close() {
 
+        log.info("Jans Authenticator destroyed");
         return;
     }
 
@@ -121,6 +109,6 @@ public class JansAuthenticatorFactory implements AuthenticatorFactory {
     @Override
     public List<ProviderConfigProperty> getConfigProperties() {
 
-        return CONFIG_PROPS;
+        return JansAuthenticatorConfigProp.asList();
     }
 }
