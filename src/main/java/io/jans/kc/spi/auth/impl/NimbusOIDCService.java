@@ -49,6 +49,7 @@ public class NimbusOIDCService implements OIDCService {
     public URI createAuthorizationUrl(String issuerUrl, OIDCAuthRequest request) throws OIDCMetaError {
 
         try {
+            
            return new AuthenticationRequest.Builder(
                 extractResponseType(request.getResponseTypes()),
                 extractScope(request.getScopes()),

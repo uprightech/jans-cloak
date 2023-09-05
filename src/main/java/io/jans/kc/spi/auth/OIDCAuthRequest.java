@@ -22,7 +22,7 @@ public class OIDCAuthRequest {
         this.redirectUri = null;
     }
 
-    public final String getClientId() {
+    public String getClientId() {
 
         return this.clientId;
     }

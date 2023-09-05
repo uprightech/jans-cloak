@@ -41,9 +41,9 @@ public class JansAuthenticator implements Authenticator {
     public void authenticate(AuthenticationFlowContext context) {
 
         Configuration config = pluginConfigurationFromContext(context);
-
         ValidationResult validationresult = config.validate();
         if(validationresult.hasErrors()) {
+            
             for(String error: validationresult.getErrors()) {
                 log.errorv("Invalid plugin configuration {0}",error);
             }
@@ -187,7 +187,7 @@ public class JansAuthenticator implements Authenticator {
 
         public boolean hasErrors() {
 
-            return this.errors == null;
+            return this.errors != null;
         }
 
         public List<String> getErrors() {
@@ -205,9 +205,9 @@ public class JansAuthenticator implements Authenticator {
 
         public Configuration(String serverUrl,String clientId, String issuerUrl, List<String> scopes) {
 
-            this.serverUrl = null;
-            this.clientId  = null;
-            this.issuerUrl = null;
+            this.serverUrl = serverUrl;
+            this.clientId  = clientId;
+            this.issuerUrl = issuerUrl;
             this.scopes = scopes;
         }
 
