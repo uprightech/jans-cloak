@@ -23,7 +23,7 @@ public enum JansAuthenticatorConfigProp {
         false),
     ISSUER(
         "jans.auth.issuer",
-        "Janssen OpenID Issuer",
+        "Janssen OpenID Issuer(Optional)",
         "OpenID issuer of the Janssen server (Optional)",
         ProviderConfigProperty.STRING_TYPE,
         null,

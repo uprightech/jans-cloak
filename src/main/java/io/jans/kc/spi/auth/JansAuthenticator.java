@@ -64,7 +64,6 @@ public class JansAuthenticator implements Authenticator {
                 .setActionUri(redirecturi)
                 .createForm(JANS_AUTH_FORM_TEMPLATE);
             context.challenge(response);
-            log.infov("Auth challenge {0} , {1}",redirecturi.toString(),jansloginurl.toString());
         }catch(OIDCMetaError e) {
             log.errorv(e,"OIDC Error obtaining the authorization url");
             Response response = context.form().createForm(JANS_AUTH_ERROR_TEMPLATE);
