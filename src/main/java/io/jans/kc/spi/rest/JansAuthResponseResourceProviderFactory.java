@@ -20,7 +20,7 @@ public class JansAuthResponseResourceProviderFactory implements RealmResourcePro
     @Override
     public RealmResourceProvider create(KeycloakSession session) {
 
-        return new JansAuthResponseResourceProvider();
+        return new JansAuthResponseResourceProvider(session);
     }
 
     @Override
