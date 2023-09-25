@@ -113,7 +113,7 @@ public class JansAuthenticator implements Authenticator {
 
         String openid_code = getOpenIdCode(context);
         if(openid_code == null) {
-            log.infov("Missing authentication code during response processing");
+            log.debugv("Missing authentication code during response processing");
             context.failure(AuthenticationFlowError.INTERNAL_ERROR,onMissingAuthenticationCode(context));
             return;
         }
@@ -123,7 +123,7 @@ public class JansAuthenticator implements Authenticator {
             OIDCTokenResponse tokenresponse = oidcService.requestTokens(config.normalizedIssuerUrl(), tokenrequest);
             if(!tokenresponse.indicatesSuccess()) {
                 OIDCTokenError error = tokenresponse.error();
-                log.errorv("Error processing token {0}. ({1}) {2}",error.code(),error.description());
+                log.debugv("Error processing token {0}. ({1}) {2}",error.code(),error.description());
                 context.failure(AuthenticationFlowError.INTERNAL_ERROR,onTokenRetrievalError(context));
                 return;
             }
@@ -131,7 +131,7 @@ public class JansAuthenticator implements Authenticator {
             OIDCUserInfoResponse userinforesponse = oidcService.requestUserInfo(config.normalizedIssuerUrl(),tokenresponse.accessToken());
             if(!userinforesponse.indicatesSuccess()) {
                 OIDCUserInfoError error = userinforesponse.error();
-                log.errorv("Error getting userinfo for authenticated user. ({0}) {1}",error.code(),error.description());
+                log.debugv("Error getting userinfo for authenticated user. ({0}) {1}",error.code(),error.description());
                 context.failure(AuthenticationFlowError.INTERNAL_ERROR,onUserInfoRetrievalError(context));
                 return;
             }
