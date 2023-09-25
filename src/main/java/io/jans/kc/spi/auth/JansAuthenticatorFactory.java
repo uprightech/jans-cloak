@@ -15,8 +15,10 @@ import org.keycloak.models.KeycloakSessionFactory;
 
 import org.keycloak.provider.ProviderConfigProperty;
 
-import io.jans.kc.spi.auth.impl.HashBasedOIDCMetaCache;
-import io.jans.kc.spi.auth.impl.NimbusOIDCService;
+import io.jans.kc.spi.auth.oidc.OIDCMetaCache;
+import io.jans.kc.spi.auth.oidc.OIDCService;
+import io.jans.kc.spi.auth.oidc.impl.HashBasedOIDCMetaCache;
+import io.jans.kc.spi.auth.oidc.impl.NimbusOIDCService;
 
 
 public class JansAuthenticatorFactory implements AuthenticatorFactory {
