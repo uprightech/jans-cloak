@@ -21,6 +21,14 @@ public enum JansAuthenticatorConfigProp {
         ProviderConfigProperty.STRING_TYPE,
         null,
         false),
+    CLIENT_SECRET(
+        "jans.auth.client.secret",
+        "Janssen Client Secret",
+        "Secret/Password of the OpenID Client created in Janssen-Auth",
+        ProviderConfigProperty.PASSWORD,
+        null,
+        true
+    ),
     ISSUER(
         "jans.auth.issuer",
         "Janssen OpenID Issuer(Optional)",
